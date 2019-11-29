@@ -9,8 +9,9 @@ import javax.persistence.Id;
 @Entity
 public class Player {
 	
-	@Id
+	
 	private static int id = 1;
+	@Id
 	private int idPlayer;
 	private String playerName;
 	private LocalDate registerDate;

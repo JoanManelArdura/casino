@@ -10,6 +10,7 @@ public class CasinoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CasinoApplication.class, args);
-		Player player = Services.createRandomPlayer();
+		
+		Automatize auto = new Automatize();
 	}
 }

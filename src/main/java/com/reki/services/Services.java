@@ -1,9 +1,11 @@
 package com.reki.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.reki.Player;
 
+@Service
 public class Services {
 	static int randomPlayerNumber=1;
 	
@@ -16,7 +18,8 @@ public class Services {
 	    return x;
 	}
 	
-	public static Player createRandomPlayer() {
+	public Player createRandomPlayer() {
+		System.out.println("creant en services");
 		String randomName= "random name "+ randomPlayerNumber;
 		randomPlayerNumber ++;
 		Player player=new Player(randomName,(int) getRandom(1,6));
