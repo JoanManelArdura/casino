@@ -1,28 +1,49 @@
 package com.reki;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
+import com.reki.services.PlayerServices;
 import com.reki.services.Services;
+import com.reki.services.TransactionService;
 
+@Component
 public class Automatize implements ApplicationListener<ApplicationReadyEvent>{
 	
 	@Autowired
+	private PlayerServices playServ;
+	@Autowired
 	private Services service;
+	@Autowired 
+	TransactionService transServ;
 	
 	private void dale(Services service) {
-		System.out.println("proba en automatize");
-		Player player = service.createRandomPlayer();
-		System.out.println(player.getPlayerName());
-		System.out.println(player.getCash());
-		System.out.println(player.getId());
+		Timer timer = new Timer (10000, new ActionListener ()
+		{
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	Player player = service.createRandomPlayer(playServ);
+		    	(new Thread(new GoLive(player, transServ))).start();
+		     }
+		}); 
+		
+		timer.start();
+		
+		
 	}
 	
 	
 	
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
+		System.out.println("arranque");
 		dale(service);
 		return;
 		

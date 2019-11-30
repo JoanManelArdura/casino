@@ -10,6 +10,7 @@ import com.reki.repository.PlayerRepository;
 
 @Service
 public class PlayerServices {
+	
 	@Autowired
 	private PlayerRepository playRepo;
 

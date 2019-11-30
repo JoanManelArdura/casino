@@ -27,7 +27,8 @@ public class Jugada {
 	@Autowired
 	TransactionService transServ;
 
-	public Jugada(Player player, int aposta, String game) {
+	public Jugada(Player player, int aposta, String game, TransactionService transServ) {
+		this.transServ = transServ;
 		this.aposta=aposta;
 		this.playerId=player.getId();
 		this.game=game;

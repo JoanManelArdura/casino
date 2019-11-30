@@ -10,7 +10,7 @@ public class Services {
 	static int randomPlayerNumber=1;
 	
 	@Autowired
-	private static PlayerServices playServ;
+	private PlayerServices playServ;
 	
 	
 	public static double getRandom(double min, double max){
@@ -18,8 +18,8 @@ public class Services {
 	    return x;
 	}
 	
-	public Player createRandomPlayer() {
-		System.out.println("creant en services");
+	public Player createRandomPlayer(PlayerServices playServ) {
+		this.playServ=playServ;
 		String randomName= "random name "+ randomPlayerNumber;
 		randomPlayerNumber ++;
 		Player player=new Player(randomName,(int) getRandom(1,6));
