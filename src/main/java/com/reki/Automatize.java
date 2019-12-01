@@ -25,6 +25,8 @@ public class Automatize implements ApplicationListener<ApplicationReadyEvent>{
 	TransactionService transServ;
 	
 	private void dale(Services service) {
+		Player player = service.createRandomPlayer(playServ);
+    	(new Thread(new GoLive(player, transServ))).start();
 		Timer timer = new Timer (10000, new ActionListener ()
 		{
 		    public void actionPerformed(ActionEvent e)
