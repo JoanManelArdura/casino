@@ -30,7 +30,9 @@ public class JugadaService {
 		jugRepo.getAllByPlayerId(id);
 		return null;
 	}
-
-		
+	
+	public void saveJugada(Jugada jugada) {
+		jugRepo.save(jugada);
+	}
 	
 }

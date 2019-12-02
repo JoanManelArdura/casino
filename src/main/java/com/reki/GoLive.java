@@ -6,6 +6,7 @@ import javax.swing.Timer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.reki.services.JugadaService;
 import com.reki.services.Services;
 import com.reki.services.TransactionService;
 
@@ -23,10 +24,14 @@ public class GoLive implements Runnable {
 
 	@Autowired
 	TransactionService transServ;
+	
+	@Autowired
+	JugadaService jugServ;
 
-	public GoLive(Player player, TransactionService transServ) {
+	public GoLive(Player player, TransactionService transServ, JugadaService jugServ) {
 		this.player = player;
 		this.transServ = transServ;
+		this.jugServ = jugServ;
 
 	}
 
@@ -40,7 +45,7 @@ public class GoLive implements Runnable {
 			while (player.getCash() > 2) {
 				if (player.getTime() > 0) {
 					Game game = chooseGame();
-					new Jugada(player, randomBet(game), game, transServ);
+					new Jugada(player, randomBet(game), game, transServ, jugServ);
 					try {
 						Thread.sleep((long) 1000);
 						player.setTime(player.getTime() - 1);

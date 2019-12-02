@@ -12,6 +12,7 @@ public class VideoBingo extends Game{
 	static double percentWin = 2.5;
 	double maxBet=100;
 	double minBet = 10;
+	String name = "VideoBingo";
 	
 	@Override
 	public double play(Player player,int bet) {
@@ -39,6 +40,14 @@ public class VideoBingo extends Game{
 
 	public void setMinBet(double minBet) {
 		this.minBet = minBet;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

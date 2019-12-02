@@ -10,6 +10,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
+import com.reki.services.JugadaService;
 import com.reki.services.PlayerServices;
 import com.reki.services.Services;
 import com.reki.services.TransactionService;
@@ -23,16 +24,18 @@ public class Automatize implements ApplicationListener<ApplicationReadyEvent>{
 	private Services service;
 	@Autowired 
 	TransactionService transServ;
+	@Autowired
+	JugadaService jugServ;
 	
 	private void dale(Services service) {
 		Player player = service.createRandomPlayer(playServ);
-    	(new Thread(new GoLive(player, transServ))).start();
+    	(new Thread(new GoLive(player, transServ, jugServ))).start();
 		Timer timer = new Timer (10000, new ActionListener ()
 		{
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	Player player = service.createRandomPlayer(playServ);
-		    	(new Thread(new GoLive(player, transServ))).start();
+		    	(new Thread(new GoLive(player, transServ, jugServ))).start();
 		     }
 		}); 
 		

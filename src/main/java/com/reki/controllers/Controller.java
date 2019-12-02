@@ -1,4 +1,4 @@
-package controllers;
+package com.reki.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ import games.BlackJack;
 		@RequestMapping(method = RequestMethod.POST, value = "/players/{id}/blackjack/")
 		public void tiraDaus(@PathVariable("id") int id) {
 			if(playServ.getPlayer(id).isPresent()) {
-			new Jugada(playServ.getPlayer(id).orElse(Services.createRandomPlayer(playServ)), 2000, black, transServ);
+			new Jugada(playServ.getPlayer(id).orElse(Services.createRandomPlayer(playServ)), 2000, black, transServ, jugServ);
 			}
 		}
 		//torna totes les tirades

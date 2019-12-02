@@ -11,6 +11,7 @@ public class Ruleta extends Game{
 	static double percentWin = 10;
 	double maxBet=1000;
 	double minBet = 10;
+	String name= "Ruleta";
 	
 	
 	@Override
@@ -49,5 +50,15 @@ public class Ruleta extends Game{
 
 	public void setMinBet(double minBet) {
 		this.minBet = minBet;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

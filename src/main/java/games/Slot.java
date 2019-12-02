@@ -12,6 +12,7 @@ public class Slot extends Game{
 	static double percentWin = 2;
 	double maxBet= 10;
 	double minBet = 1;
+	String name= "Slot";
 	
 	@Override
 	public double play(Player player,int bet) {
@@ -45,5 +46,13 @@ public class Slot extends Game{
 
 	public void setMinBet(double minBet) {
 		this.minBet = minBet;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

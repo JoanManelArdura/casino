@@ -3,6 +3,7 @@ package com.reki;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.reki.services.JugadaService;
 import com.reki.services.TransactionService;
 
 import games.BlackJack;
@@ -26,12 +27,13 @@ public class Jugada {
 	//@Autowired
 	//TransactionService transServ;
 
-	public Jugada(Player player, int aposta, Game game2, TransactionService transServy) {
+	public Jugada(Player player, int aposta, Game game2, TransactionService transServy, JugadaService jugServy) {
 		TransactionService transServ = transServy;
 		this.aposta=aposta;
 		this.playerId=player.getId();
 		this.game=game2.getName();
 		this.idJugada=id;
+		JugadaService jugServ= jugServy;
 		id++;
 		game2.play(player, aposta);
 //		switch (game2) {
@@ -51,8 +53,10 @@ public class Jugada {
 //			this.result = Ruleta.play(player, aposta);
 //			break;			
 //		}
+		this.result = game2.play(player, aposta);
 		this.won=result>0;
 		transServ.setTransaction(player, result, game2.getName());
+		jugServ.saveJugada(this);
 		
 		
 	}
