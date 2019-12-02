@@ -32,7 +32,7 @@ public class JugadaService {
 	}
 	
 	public void saveJugada(Jugada jugada) {
-		jugRepo.save(jugada);
+		//jugRepo.save(jugada);
 	}
 	
 }

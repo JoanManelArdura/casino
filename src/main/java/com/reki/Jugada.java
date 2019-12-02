@@ -35,7 +35,6 @@ public class Jugada {
 		this.idJugada=id;
 		JugadaService jugServ= jugServy;
 		id++;
-		game2.play(player, aposta);
 //		switch (game2) {
 //		case "bingo":
 //			this.result = VideoBingo.play(player, aposta);
