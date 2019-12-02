@@ -21,6 +21,10 @@ Toda la comunicacion del programa es por consola.
 
 
 
+les recuerdo mi linkedin: www.linkedin.com/in/joanmanel
+
+Saludos
+
 
 
 
