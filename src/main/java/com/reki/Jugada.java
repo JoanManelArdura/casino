@@ -1,56 +1,58 @@
 package com.reki;
 
-import javax.persistence.GeneratedValue;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.reki.services.Transaction;
 import com.reki.services.TransactionService;
 
 import games.BlackJack;
+import games.Game;
 import games.Poker;
 import games.Ruleta;
 import games.Slot;
 import games.VideoBingo;
 
+@Entity
 public class Jugada {
 	
+	private static int id = 1;
 	@Id
-	@GeneratedValue
-	long id;
+	long idJugada;
 	int playerId;
 	int aposta;
 	String game;
 	double result;
 	boolean won;
-	@Autowired
-	TransactionService transServ;
+	//@Autowired
+	//TransactionService transServ;
 
-	public Jugada(Player player, int aposta, String game, TransactionService transServ) {
-		this.transServ = transServ;
+	public Jugada(Player player, int aposta, Game game2, TransactionService transServy) {
+		TransactionService transServ = transServy;
 		this.aposta=aposta;
 		this.playerId=player.getId();
-		this.game=game;
-		switch (game) {
-		case "bingo":
-			this.result = VideoBingo.play(player, aposta);
-			break;
-		case "slot":
-			this.result = Slot.play(player, aposta);
-			break;
-		case "black":
-			this.result = BlackJack.play(player, aposta);
-			break;
-		case "poker":
-			this.result = Poker.play(player, aposta);
-			break;
-		case "ruleta":
-			this.result = Ruleta.play(player, aposta);
-			break;			
-		}
+		this.game=game2.getName();
+		this.idJugada=id;
+		id++;
+		game2.play(player, aposta);
+//		switch (game2) {
+//		case "bingo":
+//			this.result = VideoBingo.play(player, aposta);
+//			break;
+//		case "slot":
+//			this.result = Slot.play(player, aposta);
+//			break;
+//		case "black":
+//			this.result = BlackJack.play(player, aposta);
+//			break;
+//		case "poker":
+//			this.result = Poker.play(player, aposta);
+//			break;
+//		case "ruleta":
+//			this.result = Ruleta.play(player, aposta);
+//			break;			
+//		}
 		this.won=result>0;
-		transServ.setTransaction(player, result, game);
+		transServ.setTransaction(player, result, game2.getName());
 		
 		
 	}

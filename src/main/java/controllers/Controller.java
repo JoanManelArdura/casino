@@ -15,7 +15,7 @@ import com.reki.services.PlayerServices;
 import com.reki.services.Services;
 import com.reki.services.TransactionService;
 
-
+import games.BlackJack;
 
 
 	@RestController
@@ -27,6 +27,7 @@ import com.reki.services.TransactionService;
 		private TransactionService transServ;
 		@Autowired 
 		private JugadaService jugServ;
+		BlackJack black = new BlackJack();
 
 		@RequestMapping(method = RequestMethod.POST, value = "/players")
 		public void updatePlayer(Player player) {
@@ -36,7 +37,7 @@ import com.reki.services.TransactionService;
 		@RequestMapping(method = RequestMethod.POST, value = "/players/{id}/blackjack/")
 		public void tiraDaus(@PathVariable("id") int id) {
 			if(playServ.getPlayer(id).isPresent()) {
-			Jugada jugada= new Jugada(playServ.getPlayer(id).orElse(Services.createRandomPlayer(playServ)), 2000, "black", transServ);
+			new Jugada(playServ.getPlayer(id).orElse(Services.createRandomPlayer(playServ)), 2000, black, transServ);
 			}
 		}
 		//torna totes les tirades

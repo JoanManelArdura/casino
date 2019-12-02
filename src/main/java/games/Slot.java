@@ -10,8 +10,11 @@ public class Slot extends Game{
 	static double prize2 = 10;
 	static double prize3= 5;
 	static double percentWin = 2;
+	double maxBet= 10;
+	double minBet = 1;
 	
-	public static double play(Player player,int bet) {
+	@Override
+	public double play(Player player,int bet) {
 		if(Services.getRandom(0,100)<percentWin) {
 			System.out.println(player.getPlayerName() + "won big price of slot!");
 			return bet*prize;
@@ -26,5 +29,21 @@ public class Slot extends Game{
 			return bet * -1;
 		}
 		
+	}
+
+	public double getMaxBet() {
+		return maxBet;
+	}
+
+	public void setMaxBet(double maxBet) {
+		this.maxBet = maxBet;
+	}
+
+	public double getMinBet() {
+		return minBet;
+	}
+
+	public void setMinBet(double minBet) {
+		this.minBet = minBet;
 	}
 }

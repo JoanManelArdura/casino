@@ -1,13 +1,9 @@
 package com.reki.services;
 
 import java.time.LocalDate;
-import java.util.Optional;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.reki.Player;
 

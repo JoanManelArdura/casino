@@ -2,10 +2,19 @@ package com.reki;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.swing.Timer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.reki.services.Services;
 import com.reki.services.TransactionService;
+
+import games.BlackJack;
+import games.Game;
+import games.Poker;
+import games.Ruleta;
+import games.Slot;
+import games.VideoBingo;
 
 public class GoLive implements Runnable {
 
@@ -24,20 +33,25 @@ public class GoLive implements Runnable {
 	@Override
 	public void run() {
 		running.set(true);
-		
+
 		while (running.get()) {
-			
 			System.out.println("new player going live");
 			firstMoney(transServ);
 			while (player.getCash() > 2) {
-				Jugada jugada = new Jugada(player, randomBet(), chooseGame(), transServ);
-				try {
-					Thread.sleep((long) Services.getRandom(500, 3000));
-				} catch (InterruptedException e) {
-					Thread.currentThread().interrupt();
-					e.printStackTrace();
+				if (player.getTime() > 0) {
+					Game game = chooseGame();
+					new Jugada(player, randomBet(game), game, transServ);
+					try {
+						Thread.sleep((long) 1000);
+						player.setTime(player.getTime() - 1);
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+						e.printStackTrace();
+					}
+				}else {
+					System.out.println(player.getPlayerName() + " has left the casino because time is over");
+					stop();
 				}
-				
 			}
 			if (Services.getRandom(1, 100) > 50) { // hi ha un 50% possiblitats de que el jugador recarregui
 				firstMoney(transServ);
@@ -65,13 +79,24 @@ public class GoLive implements Runnable {
 		System.out.println(player.getPlayerName() + " done a deposit of: " + player.getCash() + " €");
 	}
 
-	private String chooseGame() {
-		String[] games = { "black", "poker", "slot", "bingo", "ruleta" };
-		return games[(int) Services.getRandom(0, 4)];
+	private Game chooseGame() {
+		Game game;
+		Game[] games = new Game[5];
+		games[0]=new BlackJack();
+		games[1]= new Poker();
+		games[2]= new Ruleta();
+		games[3]=new Slot();
+		games[4]= new VideoBingo();
+		game= games[(int) Services.getRandom(0, 4)];
+		if(player.getCash()<game.getMinBet())game = games[3];
+		return game;
 
 	}
 
-	private int randomBet() {
-		return (int) Services.getRandom(1, player.getCash());
+	private int randomBet(Game game) {
+		double min= game.getMinBet();
+		double max=game.getMaxBet();
+		if(player.getCash()<game.getMaxBet()) max=player.getCash();
+		return (int) Services.getRandom(min, max);
 	}
 }

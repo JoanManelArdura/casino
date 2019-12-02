@@ -9,8 +9,12 @@ public class Ruleta extends Game{
 	static double prize2 = 5;
 	static double prize3= 2;
 	static double percentWin = 10;
+	double maxBet=1000;
+	double minBet = 10;
 	
-	public static double play(Player player,int bet) {
+	
+	@Override
+	public double play(Player player,int bet) {
 		if(Services.getRandom(0,100)<(percentWin/10)) {
 			System.out.println(player.getPlayerName() + " won big price of ruleta!");
 			return bet*prize;
@@ -25,5 +29,25 @@ public class Ruleta extends Game{
 			return bet * -1;
 		}
 		
+	}
+
+
+	public double getMaxBet() {
+		return maxBet;
+	}
+
+
+	public void setMaxBet(double maxBet) {
+		this.maxBet = maxBet;
+	}
+
+
+	public double getMinBet() {
+		return minBet;
+	}
+
+
+	public void setMinBet(double minBet) {
+		this.minBet = minBet;
 	}
 }
