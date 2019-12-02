@@ -11,13 +11,6 @@ public class VideoBingo extends Game{
 	//int cardsSold;
 	static double percentWin = 2.5;
 	
-	public VideoBingo() {		
-		this.percentWin = percentWin;
-		this.prize = prize;
-		//this.numberCards = numberCards;
-		//this.cardsSold = cardsSold;
-	}
-	
 	public static double play(Player player,int bet) {
 		if(Services.getRandom(0,100)<percentWin) {
 			System.out.println(player.getPlayerName()+" won in videobingo a total of :"+ bet*prize + " €!");

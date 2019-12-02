@@ -18,8 +18,8 @@ public class Services {
 	    return x;
 	}
 	
-	public Player createRandomPlayer(PlayerServices playServ) {
-		this.playServ=playServ;
+	public static Player createRandomPlayer(PlayerServices playServ) {
+		//this.playServ=playServ;
 		String randomName= "random name "+ randomPlayerNumber;
 		randomPlayerNumber ++;
 		Player player=new Player(randomName,(int) getRandom(1,6));

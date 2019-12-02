@@ -29,5 +29,9 @@ public class PlayerServices {
 	public void savePlayer(Player player) {
 		playRepo.save(player);
 	}
+
+	public void deletePlayer(int id) {
+		playRepo.deleteById(id);
+	}
 	
 }
